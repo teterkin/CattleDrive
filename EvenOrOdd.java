@@ -9,15 +9,23 @@ public class EvenOrOdd
         }
         else
         {
-            int number = Integer.parseInt(args[0]);
-            if (number % 2 == 0)
+            try
             {
-                System.out.println("even");
+                int number = Integer.parseInt(args[0]);
+                if (number % 2 == 0)
+                {
+                    System.out.println("even");
+                }
+                else
+                {
+                    System.out.println("odd");
+                }
             }
-            else
+            catch (NumberFormatException ex)
             {
-                System.out.println("odd");
+                System.out.println("Должно быть число.");
             }
+
         }
     }
 }
