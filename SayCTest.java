@@ -88,6 +88,16 @@ public class SayCTest
     }
 
     @Test
+    public void check102345() {
+        assertEquals("сто две тысячи триста сорок пять", SayC.sayNumber(102345));
+    }
+
+    @Test
+    public void check112345() {
+        assertEquals("сто двенадцать тысяч триста сорок пять", SayC.sayNumber(112345));
+    }
+
+    @Test
     public void check167234() {
         assertEquals("сто шестьдесят семь тысяч двести тридцать четыре", SayC.sayNumber(167234));
     }
