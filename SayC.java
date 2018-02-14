@@ -15,7 +15,7 @@ public class SayC
             try
             {
                 long number = Integer.parseInt(args[0]);
-                sayNumber(number);
+                System.out.println(sayNumber(number));
             } catch (NumberFormatException ex)
             {
                 System.out.println("Принимаются только числа!");
@@ -81,11 +81,15 @@ public class SayC
                 }
                 else
                 {
-                    if (origNumber > 999 && origNumber < 2000 && modWord.equals("один"))
+                    // TODO: Доделать т.к. одна и две может быть:
+                    // 1. Когда например 101 000
+                    // 2. Когда 21 000
+                    // 3. Когда 1 000
+                    if (origNumber > 999 && origNumber < 1000000 && modWord.equals("один"))
                     {
                         modWord = odna;
                     }
-                    else if (origNumber > 1999 && origNumber < 3000 && modWord.equals("два"))
+                    else if (origNumber > 999 && origNumber < 1000000 && modWord.equals("два"))
                     {
                         modWord = dve;
                     }
