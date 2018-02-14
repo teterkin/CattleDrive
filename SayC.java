@@ -42,7 +42,7 @@ public class SayC
         long mod = 0l;
         String classWord = "";
         String stringMod = "";
-        char lastLetter;
+        String lastLetters;
         String modWord = "";
         long origNumber = number;
 
@@ -52,7 +52,7 @@ public class SayC
         }
         else if (number < 0 || number > 999999999999l)
         {
-            RS="Число должно быть от 0 до 999999999999";
+            RS = "Число должно быть от 0 до 999999999999";
         }
         else
         {
@@ -60,39 +60,61 @@ public class SayC
             {
                 mod = (number % 1000);
                 stringMod = String.valueOf(mod);
-                lastLetter = stringMod.charAt(stringMod.length() - 1);
-                // System.out.println(lastLetter);
-                if (lastLetter == '1')
+                if (stringMod.length() > 2)
                 {
-                    classWord = numClasses[classCount];
-                }
-                else if (lastLetter == '2' || lastLetter == '3' || lastLetter == '4')
-                {
-                    classWord = numClassesRP[classCount];
+                    lastLetters = "" + stringMod.charAt(stringMod.length() - 2) +
+                            stringMod.charAt(stringMod.length() - 1);
                 }
                 else
                 {
-                    classWord = numClassesPlural[classCount];
+                    lastLetters = "" + stringMod.charAt(stringMod.length() - 1);
+                }
+                int lastLettersInt = Integer.parseInt(lastLetters);
+                // System.out.println(lastLetters);
+                int llio = lastLettersInt % 10;
+                if (lastLettersInt == 1 || lastLettersInt == 0)
+                {
+                    classWord = numClasses[classCount]; // тысяча
+                }
+                else if (lastLettersInt == 2 || lastLettersInt == 3 || lastLettersInt == 4)
+                {
+                    classWord = numClassesRP[classCount]; // тысячи
+                }
+                else if (lastLettersInt > 4 && lastLettersInt < 21)
+                {
+                    classWord = numClassesPlural[classCount]; // тысяч
+                }
+                else
+                {
+                    if (llio == 1)
+                    {
+                        classWord = numClasses[classCount]; // тысяча
+                    }
+                    else if (llio == 2 || llio == 3 || llio == 4)
+                    {
+                        classWord = numClassesRP[classCount]; // тысячи
+                    }
+                    else
+                    {
+                        classWord = numClassesPlural[classCount]; // тысяч
+                    }
                 }
                 modWord = saySmallNumber((int) mod);
                 if (modWord.equals("ноль"))
                 {
                     modWord = "";
                 }
-                else
+                if (classWord.equals("тысячи"))
                 {
-                    // TODO: Доделать т.к. одна и две может быть:
-                    // 1. Когда например 101 000
-                    // 2. Когда 21 000
-                    // 3. Когда 1 000
-                    if (origNumber > 999 && origNumber < 1000000 && modWord.equals("один"))
-                    {
-                        modWord = odna;
-                    }
-                    else if (origNumber > 999 && origNumber < 1000000 && modWord.equals("два"))
-                    {
-                        modWord = dve;
-                    }
+                    modWord = modWord.replace("два", "две");
+                }
+                if (lastLettersInt == 0 && classWord.equals("миллион"))
+                {
+                    classWord = "миллионов";
+                }
+                if (classWord.equals("тысяча"))
+                {
+                    modWord = modWord.replace("один", "одна");
                 }
                 RS = "" + modWord + " " + classWord + " " + RS;
                 number = number / 1000;
@@ -141,7 +163,7 @@ public class SayC
             int RFT = (int) (number % 10);
             int R2D = (int) (number % 100);
             RS = hundreds[(int) (number / 100)];
-            if (R2D<21 && R2D != 0)
+            if (R2D < 21 && R2D != 0)
             {
                 RS += " " + firstTwenty[R2D];
             }
