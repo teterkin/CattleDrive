@@ -32,13 +32,14 @@ public class Sum
         System.out.println("Trying with BigDecimal...");
 
         BigDecimal sumBD = new BigDecimal("0");
-        sumBD.setScale(2, 4); // 4 - ROUND_HALF_UP
+        sumBD = sumBD.setScale(2, 4); // 4 - ROUND_HALF_UP
+        System.out.println("Scale = " + sumBD.scale());
 
         BigDecimal bigDecimalOneTenth = new BigDecimal("0.1");
-        bigDecimalOneTenth.setScale(2, 4);
+        bigDecimalOneTenth = bigDecimalOneTenth.setScale(2, 4);
 
         BigDecimal hundred = new BigDecimal("100");
-        hundred.setScale(2, 4);
+        hundred = hundred.setScale(2, 4);
 
         for (int i = 0; i < 1000; i++)
         {
